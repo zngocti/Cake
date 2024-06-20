@@ -7,7 +7,7 @@ public static class SideItemPlacer
     static List<GameObject> m_items;
     public static List<Material> m_materials;
 
-    public static void PlaceSideItem(GameObject prefab, Vector3 position, Quaternion rotation, Material material, int matIndex)
+    public static void PlaceSideItem(GameObject prefab, Vector3 position, Quaternion rotation, Material material, int matIndex, ParticleSystem particles)
     {
         Material[] mats;
         Material match;
@@ -15,7 +15,13 @@ public static class SideItemPlacer
         GameObject newItem = GameObject.Instantiate(prefab, position, rotation);
         newItem.transform.parent = GameManager.Instance.m_selectedCake.transform;
 
-        if(newItem.GetComponent<MeshRenderer>())
+        ParticleSystem newParticles = GameObject.Instantiate(particles, position, rotation);
+        newParticles.Stop();
+        var particlShape = newParticles.shape;
+        particlShape.meshRenderer = newItem.GetComponent<MeshRenderer>();
+        newParticles.Play();
+
+        if (newItem.GetComponent<MeshRenderer>())
             mats = newItem.GetComponent<MeshRenderer>().sharedMaterials;
         else
             mats = newItem.transform.GetChild(0).GetComponent<MeshRenderer>().sharedMaterials;

@@ -10,6 +10,7 @@ public class SideItem : SelectableItem
     public int m_matIndex;
     public Material m_itemMat;
     public GameObject m_itemPrefab;
+    public ParticleSystem _particles;
 
     private void Start()
     {
@@ -186,15 +187,15 @@ public class SideItem : SelectableItem
             switch (CameraMoveCakeLayer.Instance.m_currentLayer)
             {
                 case 0:
-                    command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex);
+                    command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex, _particles);
                     CommandInvoker.AddCommand(command);
                     break;
                 case 1:
-                    command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex);
+                    command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex, _particles);
                     CommandInvoker.AddCommand(command);
                     break;
                 case 2:
-                    command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex);
+                    command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex, _particles);
                     CommandInvoker.AddCommand(command);
                     break;
             }
@@ -206,28 +207,28 @@ public class SideItem : SelectableItem
             switch (CameraMoveCakeLayer.Instance.m_currentLayer)
             {
                 case 0:
-                    command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex);
+                    command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex, _particles);
                     CommandInvoker.AddCommand(command);
                     break;
                 case 1:
-                    command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex);
+                    command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex, _particles);
                     CommandInvoker.AddCommand(command);
                     break;
             }
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Large)
         {
-            ICommand command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex);
+            ICommand command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex, _particles);
             CommandInvoker.AddCommand(command);
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Medium)
         {
-            ICommand command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex);
+            ICommand command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex, _particles);
             CommandInvoker.AddCommand(command);
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Small)
         {
-            ICommand command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex);
+            ICommand command = new SideItemPlaceCommand(m_itemPrefab, position, rotation, m_itemMat, m_matIndex, _particles);
             CommandInvoker.AddCommand(command);
         }
     }
