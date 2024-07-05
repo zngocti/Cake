@@ -21,13 +21,39 @@ public class ZoomOutButton : MonoBehaviour
     {
         if (!m_override)
         {
-            ButtonUpdate();
+            //ButtonUpdate();
             CameraZoomUpdate();
+        }
+    }
+
+    public void UseButton()
+    {
+        if (!m_isOn)
+        {
+            if (!enabled)
+                return;
+
+            transform.Translate(Vector3.forward * -10.0f);
+            m_isOn = true;
+
+            if (m_zoomInButton.m_isOn)
+            {
+                m_zoomInButton.gameObject.transform.Translate(Vector3.forward * 10.0f);
+                m_zoomInButton.m_isOn = false;
+            }
+
+            m_zoomInButton.m_enabled = true;
+            m_enabled = false;
+
+            t = 0;
         }
     }
 
     private void ButtonUpdate()
     {
+        if (!Input.GetMouseButtonDown(0))
+            return;
+
         RaycastHit hit;
         Ray ray = m_3DUICamera.ScreenPointToRay(Input.mousePosition);
 
@@ -38,9 +64,6 @@ public class ZoomOutButton : MonoBehaviour
 
             if (!m_isOn)
             {
-                if (!Input.GetMouseButtonDown(0))
-                    return;
-
                 if (!enabled)
                     return;
 

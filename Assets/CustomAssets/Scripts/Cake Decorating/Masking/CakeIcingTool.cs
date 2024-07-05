@@ -24,6 +24,9 @@ public class CakeIcingTool : MonoBehaviour
         m_nozzlePoint = transform.GetChild(0); 
     }
 
+    static GameObject PrefabUsedSDrops;
+    static GameObject CakeSDrops;
+
     private void OnMouseDown()
     {
         m_zCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
@@ -52,12 +55,24 @@ public class CakeIcingTool : MonoBehaviour
                     case 2:
                         if (hit.collider.tag == "CakeS")
                         {
+                            if (CakeSDrops && PrefabUsedSDrops)
+                            {
+                                if (PrefabUsedSDrops == m_smallDrops && CakeSDrops.GetComponent<MeshRenderer>().material.color == m_material.color)
+                                {
+                                    return;
+                                }
+
+                                Destroy(CakeSDrops);
+                            }
+
                             GameObject drops = Instantiate(m_smallDrops, GameObject.Find("Cake_Sml").transform);
                             drops.GetComponent<MeshRenderer>().material = m_material;
                             drops.transform.localPosition   = new Vector3(0, 0, 0);
                             drops.transform.localScale      = new Vector3(1/2.54f, 1 / 2.54f, 1 / 2.54f);
                             drops.transform.localRotation   = Quaternion.Euler(new Vector3(0, 0, 0));
 
+                            CakeSDrops = drops;
+                            PrefabUsedSDrops = m_smallDrops;
 
                             GameObject m_maskObj = Instantiate(m_maskPrefab, GameObject.Find("Cake_Sml").transform);
                             m_maskObj.GetComponent<MaskObject>().m_maskObj[0] = drops;
@@ -139,5 +154,12 @@ public class CakeIcingTool : MonoBehaviour
 
             }
         }
+    }
+
+    public void SetVariables(GameObject largeDrops, GameObject medDrops, GameObject smallDrops)
+    {
+        m_largeDrops = largeDrops;
+        m_medDrops = medDrops;
+        m_smallDrops = smallDrops;
     }
 }
