@@ -10,11 +10,14 @@ public class TopItem : SelectableItem
     public int m_matIndex;
     public Material m_itemMat;
     public GameObject m_itemPrefab;
+    public Vector3 _scale = Vector3.one;
     public ParticleSystem _particles;
 
     private void Start()
     {
         GetComponent<Toggle>().onValueChanged.AddListener(delegate { SetSelected(); });
+
+        m_itemPrefab.transform.localScale = _scale;
     }
 
     public void Update()
