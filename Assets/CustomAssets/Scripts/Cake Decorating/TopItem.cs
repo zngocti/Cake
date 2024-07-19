@@ -22,6 +22,11 @@ public class TopItem : SelectableItem
 
     public void Update()
     {
+        if (!m_selected)
+        {
+            return;
+        }
+
         if (EventSystem.current.IsPointerOverGameObject())
         {
             if (m_indicator)
@@ -32,11 +37,15 @@ public class TopItem : SelectableItem
         }
 
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = CameraManager.Instance.RaycastCam.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (GameManager.Instance.m_cakeType == CAKETYPES.Three_Tier)
+            if (CameraManager.Instance.UsingZoomOut())
+            {
+                MouseControls(hit);
+            }
+            else if (GameManager.Instance.m_cakeType == CAKETYPES.Three_Tier)
             {
                 switch (CameraMoveCakeLayer.Instance.m_currentLayer)
                 {

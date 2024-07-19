@@ -16,6 +16,12 @@ public class CameraMoveCakeLayer : MonoBehaviour
 
     public bool m_goingUp;
 
+    [SerializeField]
+    GameObject _buttonUp;
+
+    [SerializeField]
+    GameObject _buttonDown;
+
     private void Start()
     {
         if (GameManager.Instance.m_cakeType == CAKETYPES.Two_Tier)
@@ -32,19 +38,25 @@ public class CameraMoveCakeLayer : MonoBehaviour
         }
     }
 
+    /*
     private void Update()
     {
         if (m_currentLayer == m_maxLayers)
         {
-            transform.localScale = new Vector3(1, -1, 1);
-            m_goingUp = false;
+            _buttonDown.SetActive(true);
+            _buttonUp.SetActive(false);
         }
         else if(m_currentLayer == 0)
         {
-            transform.localScale = new Vector3(1, 1, 1);
-            m_goingUp = true;
+            _buttonDown.SetActive(false);
+            _buttonUp.SetActive(true);
         }
-    }
+        else
+        {
+            _buttonDown.SetActive(true);
+            _buttonUp.SetActive(true);
+        }
+    }*/
 
     public void MoveUpLayer(CameraZoomPositionOverride cameraZoomPositionOverride)
     {

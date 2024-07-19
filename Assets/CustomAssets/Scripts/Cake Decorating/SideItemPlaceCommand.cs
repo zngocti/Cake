@@ -26,6 +26,11 @@ public class SideItemPlaceCommand : ICommand
        SideItemPlacer.PlaceSideItem(m_prefab, m_postion, m_rotation, m_material, m_matIndex, _particles);
     }
 
+    public GameObject ItemToExecute()
+    {
+        return m_prefab;
+    }
+
     public void Undo()
     {
         SideItemPlacer.RemoveLastItem();

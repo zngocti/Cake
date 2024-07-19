@@ -22,6 +22,11 @@ public class SideCircularItemPlaceCommand : ICommand
         SideCircularItemPlacer.PlaceSideCircularItem(m_prefab, m_placeAt, m_material, m_matIndex);
     }
 
+    public GameObject ItemToExecute()
+    {
+        return m_prefab;
+    }
+
     public void Undo()
     {
         SideCircularItemPlacer.RemoveCircularItem(m_placeAt, SideCircularItemPlacer.m_materials[SideCircularItemPlacer.m_materials.Count - 1], m_matIndex);

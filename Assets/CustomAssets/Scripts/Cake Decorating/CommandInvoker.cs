@@ -37,6 +37,19 @@ public class CommandInvoker : MonoBehaviour
         }
     }
 
+    public static bool ContainsItem(GameObject item)
+    {
+        for (int i = 0; i < m_commandHistory.Count; i++)
+        {
+            if (m_commandHistory[i].ItemToExecute() == item)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void Update()
     {
         if (m_commandBuffer.Count > 0)

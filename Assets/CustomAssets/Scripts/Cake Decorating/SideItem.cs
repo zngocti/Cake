@@ -22,6 +22,11 @@ public class SideItem : SelectableItem
 
     public void Update()
     {
+        if (!m_selected)
+        {
+            return;
+        }
+
         if (EventSystem.current.IsPointerOverGameObject())
         {
             if (m_indicator)
@@ -32,11 +37,26 @@ public class SideItem : SelectableItem
         }
 
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = CameraManager.Instance.RaycastCam.ScreenPointToRay(Input.mousePosition);
 
+        /*
+        Vector3 screenPoint = Input.mousePosition;
+        screenPoint.z = Camera.main.farClipPlane; // Change according to your needs
+        Debug.Log(Camera.main.farClipPlane);
+        Vector3 worldPoint = Camera.main.ScreenToWorldPoint(screenPoint);
+        Vector3 origin = CameraManager.Instance.CurrentCameraPos;
+        Vector3 direction = (worldPoint - origin).normalized;
+        Ray ray = new Ray(origin, direction);
+        */
         if (Physics.Raycast(ray, out hit))
         {
-            if (GameManager.Instance.m_cakeType == CAKETYPES.Three_Tier)
+            Debug.DrawRay(ray.origin, ray.direction * 3000, Color.green);
+
+            if (CameraManager.Instance.UsingZoomOut())
+            {
+                MouseControls(hit);
+            }
+            else if (GameManager.Instance.m_cakeType == CAKETYPES.Three_Tier)
             {
                 switch (CameraMoveCakeLayer.Instance.m_currentLayer)
                 {

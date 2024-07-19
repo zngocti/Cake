@@ -22,6 +22,11 @@ public class ThemeItemPlaceCommand : ICommand
         ThemeItemPlacer.PlaceThemeItem(m_prefab, m_placeAt, m_material, m_matIndex);
     }
 
+    public GameObject ItemToExecute()
+    {
+        return m_prefab;
+    }
+
     public void Undo()
     {
         ThemeItemPlacer.RemoveThemeItem(m_placeAt, ThemeItemPlacer.m_materials[ThemeItemPlacer.m_materials.Count - 1], m_matIndex);

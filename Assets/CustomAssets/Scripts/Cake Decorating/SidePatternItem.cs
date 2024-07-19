@@ -15,10 +15,15 @@ public class SidePatternItem : SelectableItem
 
     private void Update()
     {
+        if (!m_selected)
+        {
+            return;
+        }
+
         if ((int)GameManager.Instance.m_cakeType < 3)
         {
             RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = CameraManager.Instance.RaycastCam.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit))
             {
@@ -44,7 +49,7 @@ public class SidePatternItem : SelectableItem
         else
         {
             RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = CameraManager.Instance.RaycastCam.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit))
             {
@@ -59,8 +64,29 @@ public class SidePatternItem : SelectableItem
                     }
                     if (m_selected)
                     {
-                        ICommand command = new SidePatternPlaceCommand(GameManager.Instance.m_selectedCake.transform.GetChild(CameraMoveCakeLayer.Instance.m_currentLayer), m_heldPattern);
-                        CommandInvoker.AddCommand(command);
+                        if (CameraManager.Instance.UsingZoomOut())
+                        {
+                            if (hit.collider.tag.Equals("CakeL"))
+                            {
+                                ICommand command = new SidePatternPlaceCommand(GameManager.Instance.m_selectedCake.transform.GetChild(0), m_heldPattern);
+                                CommandInvoker.AddCommand(command);
+                            }
+                            else if (hit.collider.tag.Equals("CakeM"))
+                            {
+                                ICommand command = new SidePatternPlaceCommand(GameManager.Instance.m_selectedCake.transform.GetChild(1), m_heldPattern);
+                                CommandInvoker.AddCommand(command);
+                            }
+                            else if (hit.collider.tag.Equals("CakeS"))
+                            {
+                                ICommand command = new SidePatternPlaceCommand(GameManager.Instance.m_selectedCake.transform.GetChild(2), m_heldPattern);
+                                CommandInvoker.AddCommand(command);
+                            }
+                        }
+                        else
+                        {
+                            ICommand command = new SidePatternPlaceCommand(GameManager.Instance.m_selectedCake.transform.GetChild(CameraMoveCakeLayer.Instance.m_currentLayer), m_heldPattern);
+                            CommandInvoker.AddCommand(command);
+                        }
 
                         GetComponent<Toggle>().isOn = false;
                     }

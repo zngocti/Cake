@@ -17,8 +17,13 @@ public class ThemeItem : SelectableItem
 
     public void Update()
     {
+        if (!m_selected)
+        {
+            return;
+        }
+
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = CameraManager.Instance.RaycastCam.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
         {
@@ -33,7 +38,13 @@ public class ThemeItem : SelectableItem
                 }
                 if (m_selected)
                 {
+                    if (CommandInvoker.ContainsItem(m_themeItem))
+                    {
+                        return;
+                    }
+
                     SetSideModel();
+                    CameraManager.Instance.ZoomOut();
                     GetComponent<Toggle>().isOn = false;
                 }
             }

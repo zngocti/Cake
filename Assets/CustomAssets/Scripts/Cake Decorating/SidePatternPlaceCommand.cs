@@ -18,6 +18,11 @@ public class SidePatternPlaceCommand : ICommand
         SidePatternPlacer.PlaceSidePattern(m_placeAt, m_material);
     }
 
+    public GameObject ItemToExecute()
+    {
+        return null;
+    }
+
     public void Undo()
     {
         SidePatternPlacer.RemoveSidePattern(m_placeAt, SidePatternPlacer.m_materials[SidePatternPlacer.m_materials.Count - 1]);
