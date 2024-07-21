@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class SideCircularItemPlaceCommand : ICommand
 {
+    static int _currentID = 0;
+
     private GameObject m_prefab;
     private Transform m_placeAt;
     private Material m_material;
     private int m_matIndex;
+
+    private int _itemID = 0;
+
+    static int GetNewID()
+    {
+        _currentID++;
+        return _currentID;
+    }
 
     public SideCircularItemPlaceCommand(GameObject prefab, Transform placeAt, Material material, int matIndex)
     {
@@ -15,11 +25,19 @@ public class SideCircularItemPlaceCommand : ICommand
         this.m_placeAt = placeAt;
         this.m_material = material;
         this.m_matIndex = matIndex;
+
+        _itemID = GetNewID();
     }
 
     public void Execute()
     {
-        SideCircularItemPlacer.PlaceSideCircularItem(m_prefab, m_placeAt, m_material, m_matIndex);
+        SideCircularItemPlacer.PlaceSideCircularItem(m_prefab, m_placeAt, m_material, m_matIndex, _itemID);
+    }
+
+    public bool IsPlaced()
+    {
+        //return SideCircularItemPlacer.IsPlaced(m_placeAt, SideCircularItemPlacer.m_materials[SideCircularItemPlacer.m_materials.Count - 1], m_matIndex);
+        return SideCircularItemPlacer.IsPlaced(_itemID);
     }
 
     public GameObject ItemToExecute()
@@ -27,8 +45,9 @@ public class SideCircularItemPlaceCommand : ICommand
         return m_prefab;
     }
 
-    public void Undo()
+    public void Undo(bool executeOld = true)
     {
-        SideCircularItemPlacer.RemoveCircularItem(m_placeAt, SideCircularItemPlacer.m_materials[SideCircularItemPlacer.m_materials.Count - 1], m_matIndex);
+        //SideCircularItemPlacer.RemoveCircularItem(m_placeAt, SideCircularItemPlacer.m_materials[SideCircularItemPlacer.m_materials.Count - 1], m_matIndex);
+        SideCircularItemPlacer.RemoveCircularItem(_itemID);
     }
 }

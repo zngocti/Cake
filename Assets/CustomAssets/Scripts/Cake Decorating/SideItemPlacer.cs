@@ -4,10 +4,10 @@ using UnityEngine;
 
 public static class SideItemPlacer
 {
-    static List<GameObject> m_items;
+    static List<(GameObject, int)> m_items;
     public static List<Material> m_materials;
 
-    public static void PlaceSideItem(GameObject prefab, Vector3 position, Quaternion rotation, Material material, int matIndex, ParticleSystem particles)
+    public static Transform PlaceSideItem(GameObject prefab, Vector3 position, Quaternion rotation, Material material, int matIndex, ParticleSystem particles, int itemID)
     {
         Material[] mats;
         Material match;
@@ -34,7 +34,7 @@ public static class SideItemPlacer
 
         if (m_items == null)
         {
-            m_items = new List<GameObject>();
+            m_items = new List<(GameObject, int)>();
         }
 
         if (m_materials == null)
@@ -42,10 +42,15 @@ public static class SideItemPlacer
             m_materials = new List<Material>();
         }
 
-        m_items.Add(newItem);
+        (GameObject, int) newItemWithID = (newItem, itemID);
+
+        m_items.Add(newItemWithID);
         m_materials.Add(match);
+
+        return newItem.transform;
     }
 
+    /*
     public static void RemoveLastItem()
     {
         if (m_items.Count - 1 > -1)
@@ -54,5 +59,61 @@ public static class SideItemPlacer
             m_items.RemoveAt(m_items.Count - 1);
             m_materials.RemoveAt(m_materials.Count - 1);
         }
+    }*/
+
+    /*
+    public static void RemoveSideItem(Transform placedAt, Material material, int matIndex)
+    {
+        for (int i = 0; i < m_items.Count; i++)
+        {
+            if (m_items[i].transform == placedAt && m_items[i].GetComponent<MeshRenderer>().sharedMaterials[matIndex].GetInstanceID() == material.GetInstanceID())
+            {
+                GameObject.Destroy(m_items[i].gameObject);
+                m_items.RemoveAt(i);
+                m_materials.RemoveAt(i);
+                return;
+            }
+        }
+    }*/
+
+    public static void RemoveSideItem(int itemID)
+    {
+        for (int i = 0; i < m_items.Count; i++)
+        {
+            if (m_items[i].Item2 == itemID)
+            {
+                GameObject.Destroy(m_items[i].Item1);
+                m_items.RemoveAt(i);
+                m_materials.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
+    /*
+    public static bool IsPlaced(Transform placedAt, Material material, int matIndex)
+    {
+        for (int i = 0; i < m_items.Count; i++)
+        {
+            if (m_items[i].transform == placedAt && m_items[i].GetComponent<MeshRenderer>().sharedMaterials[matIndex].GetInstanceID() == material.GetInstanceID())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }*/
+
+    public static bool IsPlaced(int itemID)
+    {
+        for (int i = 0; i < m_items.Count; i++)
+        {
+            if (m_items[i].Item2 == itemID)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

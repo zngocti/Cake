@@ -5,7 +5,8 @@ using UnityEngine;
 public interface ICommand
 {
     void Execute();
-    void Undo();
+    void Undo(bool excecuteOld = true);
 
     GameObject ItemToExecute();
+    bool IsPlaced();
 }

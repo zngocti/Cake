@@ -50,6 +50,40 @@ public class CommandInvoker : MonoBehaviour
         return false;
     }
 
+    public static void UndoItem(GameObject item, bool executeOld)
+    {
+        if (item == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < m_commandHistory.Count; i++)
+        {
+            if (m_commandHistory[i].ItemToExecute() == item)
+            {
+                m_commandHistory[i].Undo();
+            }
+        }
+    }
+
+    public static ICommand GetLastCommandOfItem(GameObject item)
+    {
+        if (item == null)
+        {
+            return null;
+        }
+
+        for (int i = m_commandHistory.Count - 1; i >= 0; i--)
+        {
+            if (m_commandHistory[i].ItemToExecute() == item)
+            {
+                return m_commandHistory[i];  
+            }
+        }
+
+        return null;
+    }
+
     private void Update()
     {
         if (m_commandBuffer.Count > 0)

@@ -63,4 +63,17 @@ public static class SidePatternPlacer
             }
         }
     }
+
+    public static bool IsPlaced(Transform placedAt, Material material)
+    {
+        for (int i = 0; i < m_items.Count; i++)
+        {
+            if (m_items[i] == placedAt && m_materials[i].GetInstanceID() == material.GetInstanceID())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

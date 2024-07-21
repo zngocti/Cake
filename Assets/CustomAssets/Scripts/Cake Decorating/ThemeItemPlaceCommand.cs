@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class ThemeItemPlaceCommand : ICommand
 {
+    static int _currentID = 0;
+
     private GameObject m_prefab;
     private Transform m_placeAt;
     private Material m_material;
     private int m_matIndex;
+
+    private GameObject _previousItemOnList;
+
+    private int _itemID = 0;
+
+    static int GetNewID()
+    {
+        _currentID++;
+        return _currentID;
+    }
 
     public ThemeItemPlaceCommand(GameObject prefab, Transform placeAt, Material material, int matIndex)
     {
@@ -15,11 +27,19 @@ public class ThemeItemPlaceCommand : ICommand
         this.m_placeAt = placeAt;
         this.m_material = material;
         this.m_matIndex = matIndex;
+
+        _itemID = GetNewID();
     }
 
     public void Execute()
     {
-        ThemeItemPlacer.PlaceThemeItem(m_prefab, m_placeAt, m_material, m_matIndex);
+        ThemeItemPlacer.PlaceThemeItem(m_prefab, m_placeAt, m_material, m_matIndex, _itemID);
+    }
+
+    public bool IsPlaced()
+    {
+        //return ThemeItemPlacer.IsPlaced(m_placeAt, ThemeItemPlacer.m_materials[ThemeItemPlacer.m_materials.Count - 1], m_matIndex);
+        return ThemeItemPlacer.IsPlaced(_itemID);
     }
 
     public GameObject ItemToExecute()
@@ -27,8 +47,20 @@ public class ThemeItemPlaceCommand : ICommand
         return m_prefab;
     }
 
-    public void Undo()
+    public void Undo(bool excecuteOld = true)
     {
-        ThemeItemPlacer.RemoveThemeItem(m_placeAt, ThemeItemPlacer.m_materials[ThemeItemPlacer.m_materials.Count - 1], m_matIndex);
+        //ThemeItemPlacer.RemoveThemeItem(m_placeAt, ThemeItemPlacer.m_materials[ThemeItemPlacer.m_materials.Count - 1], m_matIndex);
+        ThemeItemPlacer.RemoveThemeItem(_itemID);
+
+        if (_previousItemOnList != null && excecuteOld)
+        {
+            ThemeItemsCounter.Instance.RestoreItemToList(_previousItemOnList);
+            CommandInvoker.GetLastCommandOfItem(_previousItemOnList).Execute();
+        }
+    }
+
+    public void SetItemOverriden(GameObject item)
+    {
+        _previousItemOnList = item;
     }
 }

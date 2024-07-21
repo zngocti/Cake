@@ -38,11 +38,6 @@ public class ThemeItem : SelectableItem
                 }
                 if (m_selected)
                 {
-                    if (CommandInvoker.ContainsItem(m_themeItem))
-                    {
-                        return;
-                    }
-
                     SetSideModel();
                     CameraManager.Instance.ZoomOut();
                     GetComponent<Toggle>().isOn = false;
@@ -53,30 +48,55 @@ public class ThemeItem : SelectableItem
 
     public void SetSideModel()
     {
+        if (ThemeItemsCounter.Instance.IsCurrent(m_themeItem))
+        {
+            return;
+        }
+
         // Check if we are in a tiered cake or not
         if (GameManager.Instance.m_cakeType == CAKETYPES.Three_Tier)
         {
-            ICommand command = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Sml").transform, m_material, m_matIndex);
+            ThemeItemPlaceCommand themeCommand = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Sml").transform, m_material, m_matIndex);
+            GameObject oldItem = ThemeItemsCounter.Instance.AddNewItemToList(m_themeItem);
+            themeCommand.SetItemOverriden(oldItem);
+            ICommand command = themeCommand;
+            CommandInvoker.UndoItem(oldItem, false);
             CommandInvoker.AddCommand(command);
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Two_Tier)
         {
-            ICommand command = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Med").transform, m_material, m_matIndex);
+            ThemeItemPlaceCommand themeCommand = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Med").transform, m_material, m_matIndex);
+            GameObject oldItem = ThemeItemsCounter.Instance.AddNewItemToList(m_themeItem);
+            themeCommand.SetItemOverriden(oldItem);
+            ICommand command = themeCommand;
+            CommandInvoker.UndoItem(oldItem, false);
             CommandInvoker.AddCommand(command);
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Large)
         {
-            ICommand command = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Lrg(Clone)").transform, m_material, m_matIndex);
+            ThemeItemPlaceCommand themeCommand = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Lrg(Clone)").transform, m_material, m_matIndex);
+            GameObject oldItem = ThemeItemsCounter.Instance.AddNewItemToList(m_themeItem);
+            themeCommand.SetItemOverriden(oldItem);
+            ICommand command = themeCommand;
+            CommandInvoker.UndoItem(oldItem,false);
             CommandInvoker.AddCommand(command);
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Medium)
         {
-            ICommand command = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Med(Clone)").transform, m_material, m_matIndex);
+            ThemeItemPlaceCommand themeCommand = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Med(Clone)").transform, m_material, m_matIndex);
+            GameObject oldItem = ThemeItemsCounter.Instance.AddNewItemToList(m_themeItem);
+            themeCommand.SetItemOverriden(oldItem);
+            ICommand command = themeCommand;
+            CommandInvoker.UndoItem(oldItem, false);
             CommandInvoker.AddCommand(command);
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Small)
         {
-            ICommand command = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Sml(Clone)").transform, m_material, m_matIndex);
+            ThemeItemPlaceCommand themeCommand = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Sml(Clone)").transform, m_material, m_matIndex);
+            GameObject oldItem = ThemeItemsCounter.Instance.AddNewItemToList(m_themeItem);
+            themeCommand.SetItemOverriden(oldItem);
+            ICommand command = themeCommand;
+            CommandInvoker.UndoItem(oldItem, false);
             CommandInvoker.AddCommand(command);
         }
     }
