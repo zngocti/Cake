@@ -10,14 +10,17 @@ public class ThemeItem : SelectableItem
     public GameObject m_themeItem;
     public Material m_material;
 
+    [SerializeField]
+    bool _instantUse = true;
+
     private void Start()
     {
-        GetComponent<Toggle>().onValueChanged.AddListener(delegate { SetSelected(); });
+        GetComponent<Toggle>().onValueChanged.AddListener(delegate { TrySetSelected(); });
     }
 
     public void Update()
     {
-        if (!m_selected)
+        if (!m_selected || _instantUse)
         {
             return;
         }
@@ -43,6 +46,18 @@ public class ThemeItem : SelectableItem
                     GetComponent<Toggle>().isOn = false;
                 }
             }
+        }
+    }
+
+    void TrySetSelected()
+    {
+        SetSelected();
+
+        if (_instantUse)
+        {
+            SetSideModel();
+            CameraManager.Instance.ZoomOut();
+            GetComponent<Toggle>().isOn = false;
         }
     }
 
