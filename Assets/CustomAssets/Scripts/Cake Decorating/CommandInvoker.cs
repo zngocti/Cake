@@ -50,18 +50,19 @@ public class CommandInvoker : MonoBehaviour
         return false;
     }
 
-    public static void UndoItem(GameObject item, bool executeOld)
+    public static void UndoItem(GameObject item, bool undoButton)
     {
         if (item == null)
         {
             return;
         }
 
-        for (int i = 0; i < m_commandHistory.Count; i++)
+        for (int i = m_commandHistory.Count - 1; i >= 0; i--)
         {
             if (m_commandHistory[i].ItemToExecute() == item)
             {
-                m_commandHistory[i].Undo();
+                m_commandHistory[i].Undo(undoButton);
+                return;
             }
         }
     }
@@ -73,7 +74,7 @@ public class CommandInvoker : MonoBehaviour
             return null;
         }
 
-        for (int i = m_commandHistory.Count - 1; i >= 0; i--)
+        for (int i = m_commandCounter - 1; i >= 0 && m_commandCounter - 1 < m_commandHistory.Count; i--)
         {
             if (m_commandHistory[i].ItemToExecute() == item)
             {

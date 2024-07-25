@@ -41,8 +41,12 @@ public class ThemeItem : SelectableItem
                 }
                 if (m_selected)
                 {
-                    SetSideModel();
-                    CameraManager.Instance.ZoomOut();
+                    if (!ThemeItemsCounter.Instance.IsCurrent(_selectableItemID))
+                    {
+                        SetSideModel();
+                        CameraManager.Instance.ZoomOut();
+                    }
+
                     GetComponent<Toggle>().isOn = false;
                 }
             }
@@ -55,63 +59,47 @@ public class ThemeItem : SelectableItem
 
         if (_instantUse)
         {
-            SetSideModel();
-            CameraManager.Instance.ZoomOut();
-            GetComponent<Toggle>().isOn = false;
+            if (!ThemeItemsCounter.Instance.IsCurrent(_selectableItemID))
+            {
+                SetSideModel();
+                CameraManager.Instance.ZoomOut();
+            }
         }
     }
 
     public void SetSideModel()
     {
-        if (ThemeItemsCounter.Instance.IsCurrent(m_themeItem))
-        {
-            return;
-        }
+        string cakeName = string.Empty;
 
         // Check if we are in a tiered cake or not
         if (GameManager.Instance.m_cakeType == CAKETYPES.Three_Tier)
         {
-            ThemeItemPlaceCommand themeCommand = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Sml").transform, m_material, m_matIndex);
-            GameObject oldItem = ThemeItemsCounter.Instance.AddNewItemToList(m_themeItem);
-            themeCommand.SetItemOverriden(oldItem);
-            ICommand command = themeCommand;
-            CommandInvoker.UndoItem(oldItem, false);
-            CommandInvoker.AddCommand(command);
+            cakeName = "Cake_Sml";
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Two_Tier)
         {
-            ThemeItemPlaceCommand themeCommand = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Med").transform, m_material, m_matIndex);
-            GameObject oldItem = ThemeItemsCounter.Instance.AddNewItemToList(m_themeItem);
-            themeCommand.SetItemOverriden(oldItem);
-            ICommand command = themeCommand;
-            CommandInvoker.UndoItem(oldItem, false);
-            CommandInvoker.AddCommand(command);
+            cakeName = "Cake_Med";
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Large)
         {
-            ThemeItemPlaceCommand themeCommand = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Lrg(Clone)").transform, m_material, m_matIndex);
-            GameObject oldItem = ThemeItemsCounter.Instance.AddNewItemToList(m_themeItem);
-            themeCommand.SetItemOverriden(oldItem);
-            ICommand command = themeCommand;
-            CommandInvoker.UndoItem(oldItem,false);
-            CommandInvoker.AddCommand(command);
+            cakeName = "Cake_Lrg(Clone)";
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Medium)
         {
-            ThemeItemPlaceCommand themeCommand = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Med(Clone)").transform, m_material, m_matIndex);
-            GameObject oldItem = ThemeItemsCounter.Instance.AddNewItemToList(m_themeItem);
-            themeCommand.SetItemOverriden(oldItem);
-            ICommand command = themeCommand;
-            CommandInvoker.UndoItem(oldItem, false);
-            CommandInvoker.AddCommand(command);
+            cakeName = "Cake_Med(Clone)";
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Small)
         {
-            ThemeItemPlaceCommand themeCommand = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find("Cake_Sml(Clone)").transform, m_material, m_matIndex);
-            GameObject oldItem = ThemeItemsCounter.Instance.AddNewItemToList(m_themeItem);
+            cakeName = "Cake_Sml(Clone)";
+        }
+
+        if (!string.IsNullOrEmpty(cakeName))
+        {
+            ThemeItemPlaceCommand themeCommand = new ThemeItemPlaceCommand(m_themeItem, GameObject.Find(cakeName).transform, m_material, m_matIndex);
+            (GameObject, int) oldItem = ThemeItemsCounter.Instance.AddNewItemToList((m_themeItem, _selectableItemID));
             themeCommand.SetItemOverriden(oldItem);
             ICommand command = themeCommand;
-            CommandInvoker.UndoItem(oldItem, false);
+            CommandInvoker.UndoItem(oldItem.Item1, false);
             CommandInvoker.AddCommand(command);
         }
     }

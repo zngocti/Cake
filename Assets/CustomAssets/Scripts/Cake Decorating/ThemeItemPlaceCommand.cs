@@ -11,7 +11,7 @@ public class ThemeItemPlaceCommand : ICommand
     private Material m_material;
     private int m_matIndex;
 
-    private GameObject _previousItemOnList;
+    private (GameObject, int) _previousItemOnList;
 
     private int _itemID = 0;
 
@@ -25,7 +25,7 @@ public class ThemeItemPlaceCommand : ICommand
     {
         this.m_prefab = prefab;
         this.m_placeAt = placeAt;
-        this.m_material = material;
+        this.m_material = new Material(material);
         this.m_matIndex = matIndex;
 
         _itemID = GetNewID();
@@ -47,19 +47,23 @@ public class ThemeItemPlaceCommand : ICommand
         return m_prefab;
     }
 
-    public void Undo(bool excecuteOld = true)
+    public void Undo(bool undoButton = true)
     {
         //ThemeItemPlacer.RemoveThemeItem(m_placeAt, ThemeItemPlacer.m_materials[ThemeItemPlacer.m_materials.Count - 1], m_matIndex);
         ThemeItemPlacer.RemoveThemeItem(_itemID);
 
-        if (_previousItemOnList != null && excecuteOld)
+        if (_previousItemOnList.Item1 != null && undoButton)
         {
             ThemeItemsCounter.Instance.RestoreItemToList(_previousItemOnList);
-            CommandInvoker.GetLastCommandOfItem(_previousItemOnList).Execute();
+            CommandInvoker.GetLastCommandOfItem(_previousItemOnList.Item1).Execute();
+        }
+        else if (_previousItemOnList.Item1 == null && undoButton)
+        {
+            ThemeItemsCounter.Instance.RestoreItemToList(_previousItemOnList);
         }
     }
 
-    public void SetItemOverriden(GameObject item)
+    public void SetItemOverriden((GameObject, int) item)
     {
         _previousItemOnList = item;
     }

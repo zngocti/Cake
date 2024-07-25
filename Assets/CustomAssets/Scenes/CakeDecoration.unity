@@ -87795,6 +87795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e534ec18b1b82b43bc81487c0b89b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxThemeItems: 1
 --- !u!4 &1991645410
 Transform:
   m_ObjectHideFlags: 0
