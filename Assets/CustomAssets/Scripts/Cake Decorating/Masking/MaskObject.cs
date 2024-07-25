@@ -15,9 +15,4 @@ public class MaskObject : MonoBehaviour
             m_maskObj[i].GetComponent<MeshRenderer>().material.renderQueue = 3002;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

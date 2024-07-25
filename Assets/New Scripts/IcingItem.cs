@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class IcingItem : SelectableItem
 {
-    static GameObject PrefabUsedSDrops;
-    static GameObject CakeSDrops;
+    //the game objects array is [0] the prefab and [1] the instance
+    static Dictionary<string, GameObject[]> _icingUsed;
 
     public Material m_material;
 
@@ -15,6 +15,19 @@ public class IcingItem : SelectableItem
     public GameObject m_largeDrops;
     public GameObject m_medDrops;
     public GameObject m_smallDrops;
+
+    private void Awake()
+    {
+        if (_icingUsed != null)
+        {
+            _icingUsed = null;
+        }
+    }
+
+    static void StartIcingUsed()
+    {
+        _icingUsed = new Dictionary<string, GameObject[]>();
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -37,25 +50,31 @@ public class IcingItem : SelectableItem
         {
             if (CameraManager.Instance.UsingZoomOut())
             {
-                if (GameManager.Instance.m_cakeType == CAKETYPES.Three_Tier && hit.collider.tag == "CakeS")
+                if (GameManager.Instance.m_cakeType == CAKETYPES.Three_Tier)
                 {
-                    MouseControls(hit);
+                    if (hit.collider.tag == "CakeS" || hit.collider.tag == "CakeM" || hit.collider.tag == "CakeL")
+                    {
+                        MouseControls(hit, hit.collider.name);
+                    }
                 }
-                else if (GameManager.Instance.m_cakeType == CAKETYPES.Two_Tier && hit.collider.tag == "CakeM")
+                else if (GameManager.Instance.m_cakeType == CAKETYPES.Two_Tier)
                 {
-                    MouseControls(hit);
+                    if (hit.collider.tag == "CakeM" || hit.collider.tag == "CakeL")
+                    {
+                        MouseControls(hit, hit.collider.name);
+                    }
                 }
                 else if (GameManager.Instance.m_cakeType == CAKETYPES.Large && hit.collider.tag == "CakeL")
                 {
-                    MouseControls(hit);
+                    MouseControls(hit, hit.collider.name);
                 }
                 else if (GameManager.Instance.m_cakeType == CAKETYPES.Medium && hit.collider.tag == "CakeM")
                 {
-                    MouseControls(hit);
+                    MouseControls(hit, hit.collider.name);
                 }
                 else if (GameManager.Instance.m_cakeType == CAKETYPES.Small && hit.collider.tag == "CakeS")
                 {
-                    MouseControls(hit);
+                    MouseControls(hit, hit.collider.name);
                 }
                 else
                 {
@@ -71,23 +90,21 @@ public class IcingItem : SelectableItem
                         {
                             return;
                         }
-                        //MouseControls(hit);
-                        return;
+                        MouseControls(hit, hit.collider.name);
                         break;
                     case 1:
                         if (hit.collider.tag != "CakeM")
                         {
                             return;
                         }
-                        //MouseControls(hit);
-                        return;
+                        MouseControls(hit, hit.collider.name);
                         break;
                     case 2:
                         if (hit.collider.tag != "CakeS")
                         {
                             return;
                         }
-                        MouseControls(hit);
+                        MouseControls(hit, hit.collider.name);
                         break;
                 }
             }
@@ -100,15 +117,14 @@ public class IcingItem : SelectableItem
                         {
                             return;
                         }
-                        //MouseControls(hit);
-                        return;
+                        MouseControls(hit, hit.collider.name);
                         break;
                     case 1:
                         if (hit.collider.tag != "CakeM")
                         {
                             return;
                         }
-                        MouseControls(hit);
+                        MouseControls(hit, hit.collider.name);
                         break;
                 }
             }
@@ -118,7 +134,7 @@ public class IcingItem : SelectableItem
                 {
                     return;
                 }
-                MouseControls(hit);
+                MouseControls(hit, hit.collider.name);
             }
             else if (GameManager.Instance.m_cakeType == CAKETYPES.Medium)
             {
@@ -126,7 +142,7 @@ public class IcingItem : SelectableItem
                 {
                     return;
                 }
-                MouseControls(hit);
+                MouseControls(hit, hit.collider.name);
             }
             else if (GameManager.Instance.m_cakeType == CAKETYPES.Small)
             {
@@ -134,12 +150,12 @@ public class IcingItem : SelectableItem
                 {
                     return;
                 }
-                MouseControls(hit);
+                MouseControls(hit, hit.collider.name);
             }
         }
     }
 
-    public void MouseControls(RaycastHit hit)
+    public void MouseControls(RaycastHit hit, string cakeName)
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -150,34 +166,48 @@ public class IcingItem : SelectableItem
 
             if (m_selected)
             {
-                StartIcing(hit);
+                StartIcing(hit, cakeName);
                 GetComponent<Toggle>().isOn = false;
             }
         }
     }
 
-    void StartIcing(RaycastHit hit)
+    void StartIcing(RaycastHit hit, string cakeName)
     {
-        if (CakeSDrops && PrefabUsedSDrops)
+        if (_icingUsed == null)
         {
-            if (PrefabUsedSDrops == m_smallDrops && CakeSDrops.GetComponent<MeshRenderer>().material.color == m_material.color)
+            StartIcingUsed();
+        }
+
+        GameObject[] icingObjcts;
+
+        if (_icingUsed.TryGetValue(cakeName, out icingObjcts))
+        {
+            //the game objects array is [0] the prefab and [1] the instance
+            if (icingObjcts[0] == m_smallDrops && icingObjcts[1].GetComponent<MeshRenderer>().material.color == m_material.color)
             {
                 return;
             }
 
-            Destroy(CakeSDrops);
+            Destroy(icingObjcts[1]);
+            _icingUsed.Remove(cakeName);
         }
 
-        GameObject drops = Instantiate(m_smallDrops, GameObject.Find("Cake_Sml").transform);
+        GameObject drops = Instantiate(m_smallDrops, GameObject.Find(cakeName).transform);
         drops.GetComponent<MeshRenderer>().material = m_material;
         drops.transform.localPosition = new Vector3(0, 0, 0);
-        drops.transform.localScale = new Vector3(1 / 2.54f, 1 / 2.54f, 1 / 2.54f);
+        //drops.transform.localScale = new Vector3(1 / 2.54f, 1 / 2.54f, 1 / 2.54f);
+        drops.transform.localScale = CakeManager.Instance.GetIcingScale(cakeName);
         drops.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
-        CakeSDrops = drops;
-        PrefabUsedSDrops = m_smallDrops;
+        //the game objects array is [0] the prefab and [1] the instance
+        icingObjcts = new GameObject[2];
+        icingObjcts[0] = m_smallDrops;
+        icingObjcts[1] = drops;
 
-        GameObject m_maskObj = Instantiate(m_maskPrefab, GameObject.Find("Cake_Sml").transform);
+        _icingUsed.Add(cakeName, icingObjcts);
+
+        GameObject m_maskObj = Instantiate(m_maskPrefab, GameObject.Find(cakeName).transform);
         m_maskObj.GetComponent<MaskObject>().m_maskObj[0] = drops;
         m_maskObj.transform.position = hit.point;
         m_maskObj.transform.localPosition += Vector3.forward * 2;
