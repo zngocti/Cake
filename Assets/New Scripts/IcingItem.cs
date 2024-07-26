@@ -8,6 +8,7 @@ public class IcingItem : SelectableItem
 {
     //the game objects array is [0] the prefab and [1] the instance
     static Dictionary<string, GameObject[]> _icingUsed;
+    static bool _isIcing = false;
 
     public Material m_material;
 
@@ -22,11 +23,18 @@ public class IcingItem : SelectableItem
         {
             _icingUsed = null;
         }
+
+        _isIcing = false;
     }
 
     static void StartIcingUsed()
     {
         _icingUsed = new Dictionary<string, GameObject[]>();
+    }
+
+    static public void StopIcing()
+    {
+        _isIcing = false;
     }
 
     // Start is called before the first frame update
@@ -39,6 +47,11 @@ public class IcingItem : SelectableItem
     void Update()
     {
         if (!m_selected)
+        {
+            return;
+        }
+
+        if (_isIcing)
         {
             return;
         }
@@ -179,6 +192,11 @@ public class IcingItem : SelectableItem
             StartIcingUsed();
         }
 
+        if (_isIcing)
+        {
+            return;
+        }
+
         GameObject[] icingObjcts;
 
         if (_icingUsed.TryGetValue(cakeName, out icingObjcts))
@@ -192,6 +210,8 @@ public class IcingItem : SelectableItem
             Destroy(icingObjcts[1]);
             _icingUsed.Remove(cakeName);
         }
+
+        _isIcing = true;
 
         GameObject drops = Instantiate(m_smallDrops, GameObject.Find(cakeName).transform);
         drops.GetComponent<MeshRenderer>().material = m_material;

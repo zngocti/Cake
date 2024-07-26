@@ -74227,9 +74227,9 @@ MonoBehaviour:
   - _name: Cake_Sml
     _vector: {x: 0.394, y: 0.394, z: 0.394}
   - _name: Cake_Med
-    _vector: {x: 0.591, y: 0.591, z: 0.394}
+    _vector: {x: 0.6, y: 0.6, z: 0.394}
   - _name: Cake_Lrg
-    _vector: {x: 0.788, y: 0.788, z: 0.394}
+    _vector: {x: 0.8, y: 0.8, z: 0.394}
 --- !u!4 &1695504015
 Transform:
   m_ObjectHideFlags: 0
