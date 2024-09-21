@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4839705813618139448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5215667990039264130}
+  - component: {fileID: 9209331215161979943}
+  - component: {fileID: 6353148315801321709}
+  - component: {fileID: 5981268780133927090}
+  m_Layer: 0
+  m_Name: Town_LCD_SignMed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5215667990039264130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4839705813618139448}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!33 &9209331215161979943
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4839705813618139448}
+  m_Mesh: {fileID: 2843709482868795899, guid: 8187195eb3268da4eb3a7e7c045dbd5e, type: 3}
+--- !u!23 &6353148315801321709
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4839705813618139448}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 7734760966192687564, guid: 8187195eb3268da4eb3a7e7c045dbd5e, type: 3}
+  - {fileID: 2100000, guid: 6a22f76795483684a9bbf9b8286d1811, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5981268780133927090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4839705813618139448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ac43dfb497d854793bed25c2d091eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_signMaterials:
+  - {fileID: 2100000, guid: eb003ab5a2e05b44097160a108dddbd5, type: 2}
+  - {fileID: 2100000, guid: 23b7102364575c34db3d5b9c5eea1a93, type: 2}
+  - {fileID: 2100000, guid: 3061b93ae75fdb246b2d99c12465e1c0, type: 2}
+  - {fileID: 2100000, guid: 253a8b748932671469de983b2777db20, type: 2}
+  - {fileID: 2100000, guid: d530b325d6c9720468fddb81db15897d, type: 2}
+  - {fileID: 2100000, guid: 5e8db150705170f4f80886660b1ac0ba, type: 2}
+  - {fileID: 2100000, guid: 6a22f76795483684a9bbf9b8286d1811, type: 2}
+  - {fileID: 2100000, guid: ed4dd28cf679daf4bbe40b5513dd43b9, type: 2}
+  - {fileID: 2100000, guid: 60964f9412edbf948acb513f8ec08d6b, type: 2}
+  - {fileID: 2100000, guid: d37395e2f5ab045459e0cb6d7bb7f5b7, type: 2}
+  - {fileID: 2100000, guid: d8d4623fa506b8046962fe13082b12f4, type: 2}
+  - {fileID: 2100000, guid: cd907c186f8a68e4cb9b37c00c3eea34, type: 2}
+  - {fileID: 2100000, guid: 32e24dda6c88a254498d2c4214782691, type: 2}
+  - {fileID: 2100000, guid: 7c42eaabca791e74684a52cc823183f6, type: 2}
+  - {fileID: 2100000, guid: 2773b15f22396864cb5570a3a7062bc9, type: 2}
+  - {fileID: 2100000, guid: 62fbe47bddf47b549a16be3fbb998329, type: 2}
+  - {fileID: 2100000, guid: c984a95d2d48d82468a851c6fc760412, type: 2}
+  - {fileID: 2100000, guid: 8714705e9e7d68e4eb8aadf9bddf8782, type: 2}
+  - {fileID: 2100000, guid: d7ee947b5c116e7489d7aacc0b719e90, type: 2}
+  - {fileID: 2100000, guid: aa51f3dae329c6c4c9e7cbb78312c558, type: 2}

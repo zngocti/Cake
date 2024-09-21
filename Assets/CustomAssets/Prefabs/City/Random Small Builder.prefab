@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4889562547764610619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4889562547764610617}
+  - component: {fileID: 4889562547764610616}
+  m_Layer: 0
+  m_Name: Random Small Builder
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4889562547764610617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889562547764610619}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.84, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4889562547764610616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889562547764610619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326d990ce01560c44b6e584f8c0a903f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StoreyNum: 3
+  m_IsCorner: 0
+  m_SmallBaseBuilding:
+  - {fileID: 7370974637409276074, guid: 9d5c5370e5f27ce4f955ea4f6681c33f, type: 3}
+  - {fileID: 5592875005581914097, guid: 36a32c403610237479db9cdc86ad0d7f, type: 3}
+  - {fileID: 282786410051455635, guid: 71fa1d2703a56df41b6b499fcfb9fab9, type: 3}
+  m_SmallBaseBuildingC:
+  - {fileID: 7801658300153451043, guid: c516c0b8b226a6c488a5388d5f9fb458, type: 3}
+  - {fileID: 2679521648913753449, guid: c992d41437e613347937dc7defc4dcf3, type: 3}
+  m_SmallFloor:
+  - {fileID: 4807456819814001937, guid: e645f11c260bd2647a1e70648b612b01, type: 3}
+  - {fileID: 998108049975771083, guid: f70466ac2cb123e43851878fdf05d2be, type: 3}
+  - {fileID: 9085231238375789022, guid: 977a33e4acb66ae48a5cc67a8fca0a73, type: 3}
+  m_SmallFloorC:
+  - {fileID: 3990349300590328628, guid: 514d3172b670ad04abeb45aa01c301f1, type: 3}
+  - {fileID: 8289882252552012733, guid: 1274f749c9f3db544aafa134f3a2cf94, type: 3}
+  m_SmallRoof:
+  - {fileID: 5502489891813042671, guid: e07f5155c630012409a1a4c7b3ae15ac, type: 3}
+  - {fileID: 8992224563399520010, guid: b45528019b1ae8344b7713fbda28a52e, type: 3}
+  - {fileID: 187552732398260749, guid: 080e4f128eb86a64db45db48aa2c0376, type: 3}
+  - {fileID: 8944419541953027753, guid: 7db5084ad62814640bb8745902452303, type: 3}
+  m_Awning: {fileID: 341644244924514941, guid: c90b97dc944f16b41982d6f50df52b84, type: 3}
+  m_AwningC: {fileID: 295092249210064914, guid: 9b415df604c92c8499a983b87596b428, type: 3}
+  m_SmallFloorBalcony: {fileID: 5259808294543805989, guid: 1a144e2940c284846b7e132754f02bf4, type: 3}
+  m_BaseMaterial:
+  - {fileID: 2100000, guid: 7aaf5fd6c7918904b97a1c55c4dc2063, type: 2}
+  - {fileID: 2100000, guid: 903335cfa63becc47a3063fb41ab444c, type: 2}
+  - {fileID: 2100000, guid: b1b72571ee99f3d4fbd392350a971d05, type: 2}
+  - {fileID: 2100000, guid: 0866a1a5721aa584a803774ad21a352f, type: 2}
+  - {fileID: 2100000, guid: 717d3b2d212b16b478a879f9c1e3883c, type: 2}
+  - {fileID: 2100000, guid: 673b816391f53344692eb2fc168bc8e8, type: 2}
+  - {fileID: 2100000, guid: cebf5011e2298b64e82ea8ef2fa698bb, type: 2}
+  - {fileID: 2100000, guid: e9295ff90e1d24b45a4ce57890ace6d5, type: 2}
+  - {fileID: 2100000, guid: b5a43109d7e9d4e449810676ec21e0b9, type: 2}
+  - {fileID: 2100000, guid: cf936dd05da23394a935764adf14a007, type: 2}
+  - {fileID: 2100000, guid: bc9a51b743eaefa4aaca9c2ba9e30070, type: 2}
+  m_DoorMaterial:
+  - {fileID: 2100000, guid: 588af0468484a7c4589e36224a617333, type: 2}
+  - {fileID: 2100000, guid: b3f833d493dc9d343a0a7ee90fd55aba, type: 2}
+  - {fileID: 2100000, guid: f5177a27a73515f49a6c460c5349c4c3, type: 2}
+  - {fileID: 2100000, guid: 4340589e85eea9f41b11453f0ed4c7e3, type: 2}
+  - {fileID: 2100000, guid: 97ac5decea852504fa1e9baeefbd5aa1, type: 2}
+  - {fileID: 2100000, guid: 1fbfd60eda9e79d4092ddcb0d3e56004, type: 2}
+  m_StoreDoorMaterial:
+  - {fileID: 2100000, guid: cee96a3a11ec3344da9dc675807c2746, type: 2}
+  - {fileID: 2100000, guid: 5f97f21f34626e84f8fe5d577b462f22, type: 2}
+  - {fileID: 2100000, guid: c4973bed3f4ade64d9a783e6a08ea543, type: 2}
+  - {fileID: 2100000, guid: 15bb7058c28626844bda627e3e3b3897, type: 2}
+  - {fileID: 2100000, guid: 33bd92abe3743de4dbb51308b4319da6, type: 2}
+  - {fileID: 2100000, guid: baabb0d0bf3c05a47847f68614ff4121, type: 2}
+  m_AwningMaterial:
+  - {fileID: 2100000, guid: 38903c6f4441658468f785344fdfb698, type: 2}
+  - {fileID: 2100000, guid: 1a82f37b52f90ee468dce51bfc221c8b, type: 2}
+  - {fileID: 2100000, guid: 23821bd4965148a4e8494c690838a585, type: 2}
+  - {fileID: 2100000, guid: f10ead0ec547940468d04e152703e1bc, type: 2}
+  - {fileID: 2100000, guid: f2ae866d6d874ba46be6b465a703fbb6, type: 2}
+  - {fileID: 2100000, guid: e91c9408f0617ef4cb89d5c0ab15c49d, type: 2}
+  - {fileID: 2100000, guid: 636e1e16a7f863d47b3e103d77620192, type: 2}
+  - {fileID: 2100000, guid: 257eb4ce6fd7ae543a8e435bdc692769, type: 2}
+  - {fileID: 2100000, guid: 7aaf5fd6c7918904b97a1c55c4dc2063, type: 2}
+  - {fileID: 2100000, guid: 903335cfa63becc47a3063fb41ab444c, type: 2}
+  - {fileID: 2100000, guid: b1b72571ee99f3d4fbd392350a971d05, type: 2}
+  - {fileID: 2100000, guid: 0866a1a5721aa584a803774ad21a352f, type: 2}
+  - {fileID: 2100000, guid: 717d3b2d212b16b478a879f9c1e3883c, type: 2}
+  - {fileID: 2100000, guid: 673b816391f53344692eb2fc168bc8e8, type: 2}
+  - {fileID: 2100000, guid: cebf5011e2298b64e82ea8ef2fa698bb, type: 2}
+  - {fileID: 2100000, guid: e9295ff90e1d24b45a4ce57890ace6d5, type: 2}
+  - {fileID: 2100000, guid: b5a43109d7e9d4e449810676ec21e0b9, type: 2}
+  - {fileID: 2100000, guid: cf936dd05da23394a935764adf14a007, type: 2}
+  - {fileID: 2100000, guid: bc9a51b743eaefa4aaca9c2ba9e30070, type: 2}
+  m_RoofMaterial:
+  - {fileID: 2100000, guid: edc8d157a5cbbda4a9d911fffd0f5f0b, type: 2}
+  - {fileID: 2100000, guid: 0f05cdd2ec818ff44bee00a9ea8f02a6, type: 2}
+  - {fileID: 2100000, guid: 665d6460598906d4b9a4246feae5aacc, type: 2}
+  - {fileID: 2100000, guid: 505610fe3e627354692660a3eb35ccd6, type: 2}
+  - {fileID: 2100000, guid: a216e16d75452a94484a351186d2f3b2, type: 2}
+  - {fileID: 2100000, guid: 7296f07d01e72ab40aa4ddfabb222248, type: 2}
+  - {fileID: 2100000, guid: 63ed879f724a85445ba73ffab11e21e5, type: 2}
+  - {fileID: 2100000, guid: 1c4e7589f65095243ae39275325ce226, type: 2}
+  - {fileID: 2100000, guid: 6c4109e27f392474db2fc063df737572, type: 2}
+  - {fileID: 2100000, guid: 4480fbee3bc28824fadaf97d7698461e, type: 2}
+  - {fileID: 2100000, guid: aae503e5936b22b4999aaf4a16742a30, type: 2}
+  m_GarageMaterial:
+  - {fileID: 2100000, guid: 3e10a06def0cc6d48acf0560596230da, type: 2}
+  - {fileID: 2100000, guid: 5ab34a988bfde224b90d62a2c859f709, type: 2}
+  - {fileID: 2100000, guid: 42f0ed1072cb9e64bb6dabc955c40715, type: 2}
+  - {fileID: 2100000, guid: 6dac98ad1432ecc419e42ce7515b9392, type: 2}
+  - {fileID: 2100000, guid: 8cf2fcd50d365cd4aa77d57fad41013e, type: 2}
+  - {fileID: 2100000, guid: 62dc55da7ba6e984193e3f616c2b0134, type: 2}

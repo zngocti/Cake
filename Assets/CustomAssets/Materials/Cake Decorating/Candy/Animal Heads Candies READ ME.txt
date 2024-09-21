@@ -1,0 +1,3 @@
+These animal candies should not work on all bakery items because we have 2 types of animal heads with 2 sizes.
+The ((Large)) animal Heads (end with A) doesnt work on the cake sides and not with all dounts shapes and no croissants too. Works on everything else.
+The small animal heads (end with B) doesnt work on the classic dount shape and croissant (these 2 types of pastry should not accept any candy).
