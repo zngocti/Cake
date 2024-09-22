@@ -112,7 +112,7 @@ public class CameraManager : MonoBehaviour
 
         if (Application.isConsolePlatform || Application.isEditor)
         {
-            Zoom(-1 * Input.GetAxis("Mouse ScrollWheel"));
+            Zoom(-1 * 3 * Input.GetAxis("Mouse ScrollWheel"));
         }
 
         if (CurrentItem.Instance.ItemSelected != null)
@@ -120,13 +120,12 @@ public class CameraManager : MonoBehaviour
             return;
         }
 
-        if (Input.touchCount == 1)
+        if (Input.touchCount == 1 || (Input.GetMouseButton(0) && !Application.isMobilePlatform))
         {
-            if (IsOverUI(Input.GetTouch(0).position))
+            if (IsOverUI(Input.mousePosition))
             {
                 return;
             }
-
 
             if (_timer >= _timeToCountTouch)
             {
@@ -138,7 +137,7 @@ public class CameraManager : MonoBehaviour
 
                 if (_timer >= _timeToCountTouch)
                 {
-                    _pointerOld = Input.touches[0].position;
+                    _pointerOld = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 }
             }
         }
@@ -153,14 +152,15 @@ public class CameraManager : MonoBehaviour
         int invertX = _invertXAxis ? -1 : 1;
         int invertY = _invertYAxis ? -1 : 1;
 
-        Vector2 touchDist = Input.touches[0].position - _pointerOld;
-        _pointerOld = Input.touches[0].position;
+        Vector2 touchDist = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - _pointerOld;
+        _pointerOld = Input.mousePosition;
 
         _zoomOut.m_XAxis.Value += invertX * touchDist.x * _senstivityX * Time.deltaTime;
         _zoomOut.m_YAxis.Value += invertY * touchDist.y * _senstivityY * Time.deltaTime;
 
         UpdateRaycastCam();
     }
+
 
     bool IsOverUI(Vector2 pos)
     {

@@ -19,7 +19,7 @@ public class CakeRotator : MonoBehaviour
                 return;
             }
 
-            GameManager.Instance.m_selectedCake.transform.Rotate(new Vector3(0, _speed * Time.deltaTime, 0));
+            GameManager.Instance.m_selectedCake.transform.Rotate(Vector3.up,  _speed * Time.deltaTime, Space.World);
         }
     }
 

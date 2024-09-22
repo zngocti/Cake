@@ -99,15 +99,15 @@ public class ThemeItem : SelectableItem
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Large)
         {
-            cakeName = "Cake_Lrg(Clone)";
+            cakeName = "Cake_Lrg";
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Medium)
         {
-            cakeName = "Cake_Med(Clone)";
+            cakeName = "Cake_Med";
         }
         else if (GameManager.Instance.m_cakeType == CAKETYPES.Small)
         {
-            cakeName = "Cake_Sml(Clone)";
+            cakeName = "Cake_Sml";
         }
 
         if (!string.IsNullOrEmpty(cakeName))
